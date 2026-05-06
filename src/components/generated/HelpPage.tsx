@@ -74,29 +74,34 @@ export const HelpPage: React.FC = () => {
       <div style={{ display: 'flex', gap: '24px', flex: 1, minHeight: 0, alignItems: 'stretch' }}>
         {/* Left rail — width matches Settings tabs */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', minWidth: '160px', width: '160px', flexShrink: 0 }}>
-          {sections.map(section => (
-            <motion.button
-              key={section}
-              type="button"
-              onClick={() => setActiveSection(section)}
-              whileHover={{ backgroundColor: 'rgba(0,0,0,0.04)' }}
-              whileTap={{ scale: 0.97 }}
-              style={{
-                padding: '10px 14px',
-                textAlign: 'left',
-                fontSize: '14px',
-                fontFamily: font,
-                color: activeSection === section ? '#000' : '#666',
-                fontWeight: activeSection === section ? 500 : 400,
-                background: activeSection === section ? 'rgba(0,0,0,0.04)' : 'transparent',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-              }}
-            >
-              {section}
-            </motion.button>
-          ))}
+          {sections.map(section => {
+            const isActive = activeSection === section;
+            return (
+              <motion.button
+                key={section}
+                type="button"
+                onClick={() => setActiveSection(section)}
+                whileHover={isActive ? {} : { backgroundColor: 'rgba(0,0,0,0.04)' }}
+                whileTap={{ scale: 0.97 }}
+                animate={{ backgroundColor: isActive ? 'rgba(0,0,0,0.04)' : 'transparent' }}
+                transition={{ duration: 0.15 }}
+                style={{
+                  padding: '10px 14px',
+                  textAlign: 'left',
+                  fontSize: '14px',
+                  fontFamily: font,
+                  color: isActive ? '#000' : '#666',
+                  fontWeight: isActive ? 500 : 400,
+                  background: 'transparent',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                }}
+              >
+                {section}
+              </motion.button>
+            );
+          })}
         </div>
 
         <div style={{ flex: 1, minWidth: 0, minHeight: 0, display: 'flex', flexDirection: 'column' }}>

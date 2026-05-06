@@ -387,28 +387,33 @@ export const SettingsPage: React.FC<{ onToast?: (msg: string) => void; onChangeP
       <div style={{ display: 'flex', gap: '24px', flex: 1, minHeight: 0 }}>
         {/* Tabs */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', minWidth: '160px', flexShrink: 0 }}>
-          {TABS.map(tab => (
-            <motion.button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              style={{
-                padding: '10px 14px',
-                textAlign: 'left',
-                fontSize: '14px',
-                fontFamily: font,
-                color: activeTab === tab ? '#000' : '#666',
-                fontWeight: activeTab === tab ? 500 : 400,
-                background: activeTab === tab ? 'rgba(0,0,0,0.04)' : 'transparent',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-              }}
-              whileHover={{ backgroundColor: 'rgba(0,0,0,0.04)' }}
-              whileTap={{ scale: 0.97 }}
-            >
-              {tab}
-            </motion.button>
-          ))}
+          {TABS.map(tab => {
+            const isActive = activeTab === tab;
+            return (
+              <motion.button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                whileHover={isActive ? {} : { backgroundColor: 'rgba(0,0,0,0.04)' }}
+                whileTap={{ scale: 0.97 }}
+                animate={{ backgroundColor: isActive ? 'rgba(0,0,0,0.04)' : 'transparent' }}
+                transition={{ duration: 0.15 }}
+                style={{
+                  padding: '10px 14px',
+                  textAlign: 'left',
+                  fontSize: '14px',
+                  fontFamily: font,
+                  color: isActive ? '#000' : '#666',
+                  fontWeight: isActive ? 500 : 400,
+                  background: 'transparent',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                }}
+              >
+                {tab}
+              </motion.button>
+            );
+          })}
         </div>
 
         {/* Content */}
@@ -687,28 +692,25 @@ export const SettingsPage: React.FC<{ onToast?: (msg: string) => void; onChangeP
           <div style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '24px', maxWidth: '400px', width: '90%', boxShadow: '0px 24px 48px rgba(0,0,0,0.12)' }} onClick={e => e.stopPropagation()}>
             <div style={{ fontSize: '18px', fontFamily: font, fontWeight: 500, marginBottom: '20px' }}>Change Password</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '24px' }}>
-              <div>
+              <div style={{ width: '100%' }}>
                 <label style={{ fontSize: '12px', fontFamily: font, color: '#888', marginBottom: '6px', display: 'block' }}>Current password</label>
-                <input type="password" placeholder="••••••••" style={inputStyle} />
+                <input type="password" placeholder="••••••••" style={{ ...inputStyle, width: '100%', maxWidth: '100%' }} />
               </div>
-              <div>
+              <div style={{ width: '100%' }}>
                 <label style={{ fontSize: '12px', fontFamily: font, color: '#888', marginBottom: '6px', display: 'block' }}>New password</label>
-                <input type="password" placeholder="••••••••" style={inputStyle} />
+                <input type="password" placeholder="••••••••" style={{ ...inputStyle, width: '100%', maxWidth: '100%' }} />
               </div>
-              <div>
+              <div style={{ width: '100%' }}>
                 <label style={{ fontSize: '12px', fontFamily: font, color: '#888', marginBottom: '6px', display: 'block' }}>Confirm new password</label>
-                <input type="password" placeholder="••••••••" style={inputStyle} />
+                <input type="password" placeholder="••••••••" style={{ ...inputStyle, width: '100%', maxWidth: '100%' }} />
               </div>
             </div>
             <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
-              <motion.button
-                whileHover={{ y: -1, boxShadow: '0px 4px 10px rgba(15,23,42,0.08)' }}
-                whileTap={{ scale: 0.97, y: 0, boxShadow: '0px 2px 6px rgba(15,23,42,0.08)' }}
+              <SlidingTextSwapButton
+                variant="secondary"
+                label="Cancel"
                 onClick={() => setShowPasswordDialog(false)}
-                style={{ padding: '9px 20px', border: '1px solid #D0D5DD', borderRadius: '8px', background: '#fff', fontSize: '14px', fontFamily: font, cursor: 'pointer' }}
-              >
-                Cancel
-              </motion.button>
+              />
               <SlidingTextSwapButton
                 variant="primary"
                 label="Update"

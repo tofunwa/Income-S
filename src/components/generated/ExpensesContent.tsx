@@ -1013,13 +1013,13 @@ const ExpenseRow: React.FC<{
             onClick={e => { e.stopPropagation(); onDetails(); }}
             style={{ width: '20px', height: '20px', backgroundColor: entry.logoBg, border: entry.logoBg === 'rgba(255,255,255,1)' ? '1px solid #000' : 'none', borderRadius: '3px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, cursor: 'pointer' }}
           >
-            <img src={entry.logo} alt="" style={{ width: '12px' }} />
+            <img src={entry.logo} alt="" style={{ width: '12px', height: '12px', objectFit: 'contain' }} />
           </motion.div>
           <span
             onClick={e => { e.stopPropagation(); onDetails(); }}
             onMouseEnter={() => setVendorHover(true)}
             onMouseLeave={() => setVendorHover(false)}
-            style={{ fontSize: '14px', color: '#000', fontFamily: font, cursor: 'pointer', minWidth: 0 }}
+            style={{ fontSize: '14px', color: '#000', fontFamily: font, cursor: 'pointer', minWidth: 0, display: 'flex', alignItems: 'center' }}
           >
             <span style={{ position: 'relative', display: 'inline-block', lineHeight: 1.2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%' }}>
               {entry.vendor}
