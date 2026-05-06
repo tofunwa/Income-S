@@ -300,7 +300,6 @@ function SettingsSelect<T extends string>({
           padding: '10px 14px',
           fontSize: '14px',
           color: '#111',
-          boxShadow: '0px 1px 2px rgba(16,24,40,0.05)',
         }}
       >
         <span style={{ fontFamily: font, textAlign: 'left', flex: 1, minWidth: 0 }}>{label}</span>
